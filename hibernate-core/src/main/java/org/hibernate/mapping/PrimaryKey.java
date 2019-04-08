@@ -58,7 +58,8 @@ public class PrimaryKey extends Constraint {
 	}
 
 	public String sqlConstraintString(Dialect dialect) {
-		StringBuilder buf = new StringBuilder("primary key (");
+		String pk =dialect.getPrimaryKeyConstraintString()==null ? "primary key (": dialect.getPrimaryKeyConstraintString()+" ( " ;
+		StringBuilder buf = new StringBuilder(pk);
 		Iterator iter = getColumnIterator();
 		while ( iter.hasNext() ) {
 			buf.append( ( (Column) iter.next() ).getQuotedName(dialect) );
