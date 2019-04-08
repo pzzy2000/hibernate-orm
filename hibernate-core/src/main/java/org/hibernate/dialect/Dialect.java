@@ -2163,6 +2163,10 @@ public abstract class Dialect implements ConversionContext {
 	public String getAddPrimaryKeyConstraintString(String constraintName) {
 		return " add constraint " + constraintName + " primary key ";
 	}
+	
+	public String getPrimaryKeyConstraintString() {
+		return null;
+	}
 
 	/**
 	 * Does the database/driver have bug in deleting rows that refer to other rows being deleted in the same query?
