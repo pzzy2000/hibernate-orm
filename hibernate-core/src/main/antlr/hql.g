@@ -53,7 +53,7 @@ tokens
 	IN="in";
 	INDICES="indices";
 	INNER="inner";
-	INSERT="insert";
+	INSERT="upsert";
 	INTO="into";
 	IS="is";
 	JOIN="join";

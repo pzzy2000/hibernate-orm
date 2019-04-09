@@ -7,6 +7,7 @@
 package org.hibernate.cache.spi;
 
 import org.hibernate.cache.spi.access.AccessType;
+
 import org.hibernate.metamodel.model.domain.NavigableRole;
 
 import org.jboss.logging.BasicLogger;

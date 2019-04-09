@@ -92,7 +92,8 @@ public class Insert {
 		if ( comment != null ) {
 			buf.append( "/* " ).append( comment ).append( " */ " );
 		}
-		buf.append("insert into ")
+//		buf.append("insert into ")
+		buf.append("upsert into ")
 			.append(tableName);
 		if ( columns.size()==0 ) {
 			buf.append(' ').append( dialect.getNoColumnsInsertString() );

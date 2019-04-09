@@ -162,8 +162,84 @@ public class Update {
 		this.where=where;
 		return this;
 	}
-
+	
+	
 	public String toStatementString() {
+		StringBuilder buf = new StringBuilder( columns.size()*15 + tableName.length() + 10 );
+		if ( comment != null ) {
+			buf.append( "/* " ).append( comment ).append( " */ " );
+		}
+//		buf.append("insert into ")
+		buf.append("upsert into ")
+			.append(tableName);
+		if ( columns.size()==0 ) {
+			buf.append(' ').append( dialect.getNoColumnsInsertString() );
+		}
+		else {
+			buf.append(" (");
+			
+			Iterator iter = columns.keySet().iterator();
+			while ( iter.hasNext() ) {
+				buf.append( iter.next() );
+				if ( iter.hasNext() ) {
+					buf.append( ", " );
+				}
+			}
+			
+			if(primaryKeyColumns.size()>0) {
+				buf.append( ", " );
+			}
+			
+			iter = primaryKeyColumns.keySet().iterator();
+			
+			while ( iter.hasNext() ) {
+				buf.append( iter.next() );
+				if ( iter.hasNext() ) {
+					buf.append( ", " );
+				}
+			}
+			
+			if ( versionColumnName != null ) {
+				
+				buf.append( versionColumnName );
+			}
+			
+			buf.append(") values (");
+			
+			iter = columns.values().iterator();
+			while ( iter.hasNext() ) {
+				buf.append( iter.next() );
+				if ( iter.hasNext() ) {
+					buf.append( ", " );
+				}
+			}
+			
+			if(primaryKeyColumns.size()>0) {
+				buf.append( ", " );
+			}
+			
+			iter = primaryKeyColumns.values().iterator();
+			while ( iter.hasNext() ) {
+				buf.append( iter.next() );
+				if ( iter.hasNext() ) {
+					buf.append( ", " );
+				}
+			}
+			
+           if ( versionColumnName != null ) {
+				
+				buf.append("?");
+			}
+			
+			buf.append(')');
+		}
+		
+//		buf.append (" on duplicate key update");
+		return buf.toString();
+	}
+	
+
+	public String toStatementStrings() {
 		StringBuilder buf = new StringBuilder( (columns.size() * 15) + tableName.length() + 10 );
 		if ( comment!=null ) {
 			buf.append( "/* " ).append( comment ).append( " */ " );
