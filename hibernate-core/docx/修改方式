@@ -1,1 +1,5 @@
-org.hibernate.sql¡£Insert  95  buf.append("insert into ") -> 
+org.hibernate.sqlï¿½ï¿½Insert  95  buf.append("insert into ") -> 
+
+
+
+org.hibernate.cfg.annotations.QueryBinder   364
